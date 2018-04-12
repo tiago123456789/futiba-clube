@@ -9,7 +9,12 @@ app.use(session({
     secret: 'futiba-club',
     resave: true,
     saveUninitialized: true,
-}))
+}));
+
+/**
+ * @description Defined dir asserts application.
+ */
+app.use(express.static("public"))
 
 app.get("/", (request, response) => {
     response.send("First route app.");
