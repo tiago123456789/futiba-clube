@@ -1,106 +1,168 @@
-
 <!DOCTYPE html>
 
 <html lang="en" class="full-height">
 
-    <head>
+<head>
 
-        <link rel="shortcut icon" type="image/png" href="https://i.imgur.com/Tlyy9su.png"/>
+    <link rel="shortcut icon" type="image/png" href="https://i.imgur.com/Tlyy9su.png" />
 
-        <meta charset="utf-8">
+    <meta charset="utf-8">
 
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-        <title>Futiba Club</title>
+    <title>Futiba Club</title>
 
-        <!-- Font Awesome -->
+    <!-- Font Awesome -->
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-        <!-- Bootstrap -->
+    <!-- Bootstrap -->
 
-        <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
 
-        <!-- Material Design Bootstrap -->
+    <!-- Material Design Bootstrap -->
 
-        <link href="/css/mdb.min.css" rel="stylesheet">
+    <link href="/css/mdb.min.css" rel="stylesheet">
 
-        <!-- Custom Styles -->
+    <!-- Custom Styles -->
 
-        <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
 
-        <link href="/css/futiba.css" rel="stylesheet">
+    <link href="/css/futiba.css" rel="stylesheet">
 
-    </head>
+</head>
 
-    <body>
+<body>
 
-        <header>
+    <header>
 
-            <nav class="navbar-home navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
+        <nav class="navbar-home navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
 
-                <div class="container">
+            <div class="container">
 
-                    <a class="navbar-brand" href="/">
-                        <img src="/img-futiba-club/logo.png" height="30" alt="Futiba Club">
-                    </a>
+                <a class="navbar-brand" href="/">
+                    <img src="/img-futiba-club/logo.png" height="30" alt="Futiba Club">
+                </a>
 
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
 
-                        <% include elements/menu %>
+                    <ul class="navbar-nav mr-auto">
 
-                    </div> <!-- Collapse Navbar -->
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/">Home</a>
+                        </li>
 
-                </div> <!-- Container -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="/groups">Grupos</a>
+                        </li>
 
-            </nav> <!-- Navbar -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="/classification">Classificação</a>
+                        </li>
 
-            <section class="view intro-2 hm-gradient"> <!-- Intro Section -->
+                        <li class="nav-item dropdown">
 
-                <div class="full-bg-img">
+                            <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
 
-                    <div class="container flex-center">
 
-                        <div class="row flex-center">
+                            </a>
 
-                            <div class="col-md-10 col-lg-6 text-center text-md-left margins">
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 
-                                <div class="white-text">
 
-                                    <h1 class="h1-responsive font-bold mt-sm-5 wow fadeInLeft" data-wow-delay="0.3s">Desafie seus amigos</h1>
+                                <a class="dropdown-item" href="/admin/games">Gerenciar</a>
 
-                                    <hr class="hr-light wow fadeInLeft" data-wow-delay="0.3s">
+                                <a class="dropdown-item" href="/logout">Logout</a>
 
-                                    <h6 class="wow fadeInLeft" data-wow-delay="0.3s">Quem consegue acertar mais jogos da Copa e do     Brasileirão ?</h6><br>
+                            </div>
+                            <!-- Dropdown Menu -->
 
-                                    <% if (!user) { %>
-                                        <a class="btn btn-white dark-grey-text font-bold wow fadeInLeft" data-wow-delay="0.3s" href="/new-account">Criar Conta</a>
-                                    <% } %>
+                        </li>
 
-                                </div>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">Entrar</a>
+                        </li>
+
+                    </ul>
+                </div>
+                <!-- Collapse Navbar -->
+
+            </div>
+            <!-- Container -->
+
+        </nav>
+        <!-- Navbar -->
+
+        <section class="view intro-2 hm-gradient">
+            <!-- Intro Section -->
+
+            <div class="full-bg-img">
+
+                <div class="container flex-center">
+
+                    <div class="row flex-center">
+
+                        <div class="col-md-10 col-lg-6 text-center text-md-left margins">
+
+                            <div class="white-text">
+
+                                <h1 class="h1-responsive font-bold mt-sm-5 wow fadeInLeft" data-wow-delay="0.3s">Desafie seus amigos</h1>
+
+                                <hr class="hr-light wow fadeInLeft" data-wow-delay="0.3s">
+
+                                <h6 class="wow fadeInLeft" data-wow-delay="0.3s">Quem consegue acertar mais jogos da Copa e do Brasileirão ?</h6>
+                                <br>
 
                             </div>
 
-                            <div class="col-md-6 col-lg-6 hidden-md-down wow fadeInRight d-flex justify-content-center" data-wow-delay="0.3s">
+                        </div>
 
-                                <img src="/img-futiba-club/mock.png" alt="" class="img-fluid">
+                        <div class="col-md-6 col-lg-6 hidden-md-down wow fadeInRight d-flex justify-content-center" data-wow-delay="0.3s">
 
-                            </div>
+                            <img src="/img-futiba-club/mock.png" alt="" class="img-fluid">
 
-                        </div> <!-- Row -->
+                        </div>
 
-                    </div> <!-- Container -->
+                    </div>
+                    <!-- Row -->
 
-                </div> <!-- Full Image -->
+                </div>
+                <!-- Container -->
 
-            </section> <!-- Intro Section -->
+            </div>
+            <!-- Full Image -->
 
-        </header> <!-- Header -->
+        </section>
+        <!-- Intro Section -->
 
-    <% include elements/footer %>
+    </header>
+    <!-- Header -->
+
+
+    <!-- JQuery -->
+
+    <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
+
+    <!-- Bootstrap Tool Tips -->
+
+    <script type="text/javascript" src="/js/popper.min.js"></script>
+
+    <!-- Bootstrap Core Js -->
+
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+
+    <!-- Mdb Core Js -->
+
+    <script type="text/javascript" src="/js/mdb.min.js"></script>
+
+</body>
+
+</html>
