@@ -16,6 +16,11 @@ app.use(session({
 }));
 
 /**
+ * @description Defined template engine used in app.
+ */
+app.set("view engine", "ejs");
+
+/**
  * @description Defined dir asserts application.
  */
 app.use(express.static("public"))
