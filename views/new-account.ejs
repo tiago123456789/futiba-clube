@@ -1,95 +1,117 @@
 <% include ./partials/header.ejs %>
-        <header>
+    <header>
 
-            <nav class="navbar navbar-expand-lg navbar-light green fixed-top scrolling-navbar">
-
-                <div class="container">
-
-                    <a class="navbar-brand" href="/">
-                        <img src="/img-futiba-club/logo.png" height="30" alt="Futiba Club">
-                    </a>
-
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7"
-                        aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
-                        <% include ./partials/menu.ejs %>
-                    </div> <!-- Navbar Collapse -->
-
-                </div> <!-- Container -->
-
-            </nav> <!-- Navbar -->
-
-        </header> <!-- Header -->
-
-        <section class="content">
+        <nav class="navbar navbar-expand-lg navbar-light green fixed-top scrolling-navbar">
 
             <div class="container">
 
-                <div class="row">
+                <a class="navbar-brand" href="/">
+                    <img src="/img-futiba-club/logo.png" height="30" alt="Futiba Club">
+                </a>
 
-                    <form class="col" method="post">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-                        <div class="md-form">
-
-                            <i class="fa fa-user prefix grey-text"></i>
-
-                            <input type="text" id="orangeForm-name" class="form-control"  name="name">
-
-                            <label for="orangeForm-name">Seu nome</label>
-
-                        </div> <!-- Name Create Account -->
-
-                        <div class="md-form">
-
-                            <i class="fa fa-envelope prefix grey-text"></i>
-
-                            <input type="text" id="orangeForm-email" class="form-control" name="email">
-
-                            <label for="orangeForm-email">Seu e-mail</label>
-
-                        </div> <!-- E-mail Create Account -->
-
-                        <div class="md-form">
-
-                            <i class="fa fa-lock prefix grey-text"></i>
-
-                            <input type="password" id="orangeForm-pass" class="form-control"  name="passwd">
-
-                            <label for="orangeForm-pass">Sua senha</label>
-
-                        </div> <!-- Password Create Account -->
-
-                        <div class="text-center">
-
-                            <button class="btn btn-deep-orange">Criar</button>
-
-                        </div>
-
-                    </form> <!-- Create Account -->
-
-                </div> <!-- Container -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
+                    <% include ./partials/menu.ejs %>
+                </div>
+                <!-- Navbar Collapse -->
 
             </div>
+            <!-- Container -->
 
-        </section> <!-- Content -->
+        </nav>
+        <!-- Navbar -->
 
-        <!-- JQuery -->
+    </header>
+    <!-- Header -->
 
-        <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
+    <section class="content">
 
-        <!-- Bootstrap Tool Tips -->
+        <div class="container">
+            
+            <% if (message) { %>
+                <div class="alert alert-danger">
+                        <strong><%= message%> </strong>
+                </div>
+            <% } %>
+        
 
-        <script type="text/javascript" src="/js/popper.min.js"></script>
+            <div class="row">
 
-        <!-- Bootstrap Core Js -->
+                <form class="col" method="post">
 
-        <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+                    <div class="md-form">
 
-        <!-- Mdb Code Js -->
+                        <i class="fa fa-user prefix grey-text"></i>
 
-        <script type="text/javascript" src="/js/mdb.min.js"></script>
+                        <input type="text" id="orangeForm-name"
+                         class="form-control" name="name" value='<%= name %>'>
+
+                        <label for="orangeForm-name">Seu nome</label>
+
+                    </div>
+                    <!-- Name Create Account -->
+
+                    <div class="md-form">
+
+                        <i class="fa fa-envelope prefix grey-text"></i>
+
+                        <input type="text" id="orangeForm-email" class="form-control" name="email">
+
+                        <label for="orangeForm-email">Seu e-mail</label>
+
+                    </div>
+                    <!-- E-mail Create Account -->
+
+                    <div class="md-form">
+
+                        <i class="fa fa-lock prefix grey-text"></i>
+
+                        <input type="password" id="orangeForm-pass" 
+                            class="form-control" name="password"
+                            value='<%= password %>'>
+
+                        <label for="orangeForm-pass">Sua senha</label>
+
+                    </div>
+                    <!-- Password Create Account -->
+
+                    <div class="text-center">
+
+                        <button class="btn btn-deep-orange">Criar</button>
+
+                    </div>
+
+                </form>
+                <!-- Create Account -->
+
+            </div>
+            <!-- Container -->
+
+        </div>
+
+    </section>
+    <!-- Content -->
+
+    <!-- JQuery -->
+
+    <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
+
+    <!-- Bootstrap Tool Tips -->
+
+    <script type="text/javascript" src="/js/popper.min.js"></script>
+
+    <!-- Bootstrap Core Js -->
+
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+
+    <!-- Mdb Code Js -->
+
+    <script type="text/javascript" src="/js/mdb.min.js"></script>
 
     </body>
 
-</html>
+    </html>
