@@ -1,39 +1,4 @@
-
-<!DOCTYPE html>
-
-<html lang="en">
-
-    <head>
-
-        <meta charset="utf-8">
-
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-
-        <title>Futiba Club</title>
-
-        <!-- Font Awesome -->
-
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-        <!-- Bootstrap -->
-
-        <link href="/css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- Material Design Bootstrap -->
-
-        <link href="/css/mdb.min.css" rel="stylesheet">
-
-        <!-- Your Custom Styles -->
-
-        <link href="/css/style.css" rel="stylesheet">
-
-        <link href="/css/futiba-interno.css" rel="stylesheet">
-
-    </head>
-
-    <body>
+<% include ./partials/header.ejs %>
 
         <header>
 
@@ -50,30 +15,7 @@
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
 
-                        <ul class="navbar-nav mr-auto">
-
-                            <li class="nav-item active">
-                                <a class="nav-link" href="/">Home</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="/groups">Grupos</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="/classification">Classificação</a>
-                            </li>
-
-                            <li class="nav-item">
-
-                                <a class="nav-link" aria-haspopup="true" aria-expanded="false">
-                                    Entrar
-                                </a>
-
-                            </li>
-
-                        </ul>
-
+                        <% include ./partials/menu.ejs %>
                     </div> <!-- Navbar Collapse -->
 
                 </div> <!-- Container -->
@@ -109,12 +51,6 @@
                             <label for="orangeForm-pass">Senha</label>
 
                         </div> <!-- Password Login -->
-
-                        <% if (error) { %>
-
-                            <p class="alert alert-info"><%= error %></p>
-
-                        <% } %>
 
                         <div class="text-center">
 

@@ -36,6 +36,14 @@ app.get("/", async (request, response) => {
     
 });
 
+app.get("/login", (request, response) => {
+    response.render("login");
+});
+
+app.get("/new-account", (request, response) => {
+    response.render("new-account");
+})
+
 function extractRegisterQuery(query) {
     const [rows, fields] = query;
     return rows;

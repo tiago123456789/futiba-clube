@@ -12,36 +12,28 @@
         <a class="nav-link" href="/classification">Classificação</a>
     </li>
 
-    <% if (user) { %>
-
     <li class="nav-item dropdown">
 
-        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
 
-            <%= user.name %>
 
         </a>
 
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 
-            <% if (user.role === "root") { %>
 
             <a class="dropdown-item" href="/admin/games">Gerenciar</a>
 
-            <% } %>
-
             <a class="dropdown-item" href="/logout">Logout</a>
 
-        </div> <!-- Dropdown Menu -->
+        </div>
+        <!-- Dropdown Menu -->
 
     </li>
-
-    <% } else { %>
 
     <li class="nav-item">
         <a class="nav-link" href="/login">Entrar</a>
     </li>
-
-    <% } %>
 
 </ul>
