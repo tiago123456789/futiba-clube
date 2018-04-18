@@ -1,4 +1,4 @@
-const connectionFactory = require("./../config/Database");
+const connectionDB = require("./../config/Database");
 
 class DAO {
     
@@ -7,7 +7,7 @@ class DAO {
     }
 
     async getConexao() {
-        return await connectionFactory.getConexao();
+        return await connectionDB();
     }
 
     async save(newContent) {
@@ -25,12 +25,12 @@ class DAO {
 
     async findAll() {
         const connection = await this.getConexao();
-        return this._extractRegisterQuery(await connection.execute(`SELECT * FROM ${this.table}`));
+        return this.extractRegisterQuery(await connection.execute(`SELECT * FROM ${this.table}`));
     }
 
     async findById(id) {
         const connection = await this.getConexao();
-        return this._extractRegisterQuery(await connection.execute(`SELECT * FROM ${this.table} WHERE id = ?`, [id])); 
+        return this.extractRegisterQuery(await connection.execute(`SELECT * FROM ${this.table} WHERE id = ?`, [id])); 
     }
 
     async delete(id) {
@@ -54,7 +54,7 @@ class DAO {
 
     getColumnsUpdate() {}
 
-    _extractRegisterQuery = (query) => {
+    extractRegisterQuery(query) {
         const [rows, fields] = query;
         return rows;
     }

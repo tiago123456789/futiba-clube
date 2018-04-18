@@ -2,8 +2,9 @@ const express = require("express");
 const session = require("express-session");
 const bodyParser = require("body-parser");
 
-const connectionDB = require("./config/Database");
 const app = express();
+const UserDAO = require("./dao/UserDAO");
+const userDAO = new UserDAO();
 
 /**
  * @description Configure session in application.
@@ -31,10 +32,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", async (request, response) => {
     try {
-        connectionDB.then(async (connection) => {
-            const rows = extractRegisterQuery(await connection.execute("SELECT * FROM users"));
-            console.log(rows);
-        });
+        const rows = await userDAO.findAll();
+        console.log(rows);
         response.render("home");
     } catch (e) {
         console.log(e);
@@ -51,24 +50,21 @@ app.get("/new-account", (request, response) => {
 });
 
 
-app.post("/new-account", (request, response) => {
-    const newAccount = request.body;
-    connectionDB.then(async (connection) => {
-        const rows = extractRegisterQuery(await connection.execute("SELECT * FROM users WHERE email = ?", [newAccount.email]));
-        if (rows.length == 0) {
-            await connection.execute("INSERT INTO users(name, email, password) VALUES(?, ?, ?)",
-                [newAccount.name, newAccount.email, newAccount.password]);
+app.post("/new-account", async (request, response) => {
+    try {
+        const newAccount = request.body;
+        const isExistUserEmail = userDAO.searchUserPerEmail(newAccount.email).length > 0;
+        if (!isExistUserEmail) {
+            newAccount.role = "USER";
+            await userDAO.save(newAccount);
             response.redirect("/new-account");
         } else {
             response.render("new-account", { message: "Email já está em uso!", ...newAccount });
         }
-    }).catch(error => console.log(error));
+    } catch (e) {
+        console.log(e);
+    }
 });
-
-function extractRegisterQuery(query) {
-    const [rows, fields] = query;
-    return rows;
-}
 
 
 app.listen(3000, () => console.log("Server ready!!!"));
