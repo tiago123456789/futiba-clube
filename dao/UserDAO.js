@@ -1,28 +1,17 @@
-const ConnectionFactory = require("./ConnectionFactory");
+const DAO = require("./DAO");
 
-function UserDao() {
-    const conexao = null;
+class UserDao extends DAO {
 
-    const initialize = async () => {
-        conexao = await ConnectionFactory.getConexao();
-    };
-
-    const extractRegisterQuery = (query) => {
-        const [rows, fields] = query;
-        return rows;
+    constructor() {
+        super("users");
+    }
+    
+    getColumnsSave() {
+        return ["name", "email", "senha", "role"];
     }
 
-    this.searchSpecifiedUserPerEmail = async (email) => {
-        const registers = extractRegisterQuery(
-                                    await conexao.execute("SELECT * FROM users WHERE email = ?", [email]));
-
-        return registers;
-    };
-
-    this.create = async (newAccount) => {
-        return await conexao.execute("INSERT INTO users(name, email, password, role) VALUES(?, ?, ?, ?)",
-            [newAccount.name, newAccount.email, newAccount.password, "ROOT"])
+    getColumnsUpdate() {
+        return ["name", "email", "senha", "role"];
     }
 
-    initialize();
 }
