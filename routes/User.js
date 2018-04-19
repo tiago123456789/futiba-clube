@@ -10,11 +10,10 @@ module.exports = (router) => {
     router.post("/login", async (request, response) => {
         const credenciais = request.body;
         const userExist = await userDAO.searchUserPerEmail(credenciais.email);
-        console.log(userExist);
         if (userExist.length > 0) {
             const session = request.session;
-            delete userExist.password;
-            session.user = userExist;
+            delete userExist[0].password;
+            session.user = userExist[0];
             return response.redirect("/home");
         } else {
             response.render("login", { "error": "Email ou senha inválido!" });

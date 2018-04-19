@@ -11,27 +11,29 @@
     <li class="nav-item">
         <a class="nav-link" href="/classification">Classificação</a>
     </li>
+    <% if (user) { %>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <% if (user.role == "ROOT") { %>
+                    <a class="dropdown-item" href="/admin/games">Gerenciar</a>    
+                <% } %>
+                
+                <a class="dropdown-item" href="/users/logout">Logout</a>
+            </div>
+        </li>
+    <% } %>
 
-    <li class="nav-item dropdown">
 
-        <a class="nav-link dropdown-toggle" href="http://example.com" 
-            id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false">
-        </a>
-
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-
-            <a class="dropdown-item" href="/admin/games">Gerenciar</a>
-
-            <a class="dropdown-item" href="/logout">Logout</a>
-
-        </div>
-        <!-- Dropdown Menu -->
-
-    </li>
-
-    <li class="nav-item">
-        <a class="nav-link" href="/users/login">Entrar</a>
-    </li>
+            <li class="nav-item">
+                <% if (user) { %>
+                    <a class="nav-link" ><%= user.name %></a>                                
+                <% } else { %>
+                    <a class="nav-link" href="/users/login">Entrar</a>
+                <% }%>
+    
+            </li>
 
 </ul>

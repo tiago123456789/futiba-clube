@@ -11,8 +11,9 @@ module.exports = ({ app, express }) => {
         const { user } = request.session;
         if (user) {
             response.locals.user = user; 
+        } else {
+            response.locals.user = null;
         }
-
         next();
     });
 
