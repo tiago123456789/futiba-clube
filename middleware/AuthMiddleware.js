@@ -5,7 +5,7 @@ class AuthMiddleware {
         if (user && user.role == "ROOT") {
             next();
         } else {
-            response.redirect("/");
+            response.redirect("/home");
         }
     }
 }
