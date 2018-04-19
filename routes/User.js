@@ -3,24 +3,21 @@ const userDAO = new UserDAO();
 
 module.exports = (router) => {
     
-    function redirect(response) {
-        response.redirect("/home");
-    }
-
-    router.get("/logout", (request, response) => request.session.destroy(() => redirect(response)));
+    router.get("/logout", (request, response) => request.session.destroy(() => response.redirect("/home")));
 
     router.get("/login", (request, response) => response.render("login", { "error": "" }));
 
     router.post("/login", async (request, response) => {
         const credenciais = request.body;
         const userExist = await userDAO.searchUserPerEmail(credenciais.email);
-        if (userExist) {
+        console.log(userExist);
+        if (userExist.length > 0) {
             const session = request.session;
             delete userExist.password;
             session.user = userExist;
-            redirect(response);
+            return response.redirect("/home");
         } else {
-            response.render("login", { "error": "Email/Senha inválido!" });
+            response.render("login", { "error": "Email ou senha inválido!" });
         }
     })
 

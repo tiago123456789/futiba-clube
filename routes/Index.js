@@ -7,11 +7,13 @@ module.exports = ({ app, express }) => {
     /**
      * @description Capture user in session is set on response locals.
      */
-    app.use((request, response) => {
+    app.use((request, response, next) => {
         const { user } = request.session;
         if (user) {
             response.locals.user = user; 
         }
+
+        next();
     });
 
     app.use("/users", userRouter(express.Router()));
