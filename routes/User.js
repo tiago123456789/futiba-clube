@@ -4,11 +4,10 @@ const userDAO = new UserDAO();
 module.exports = (router) => {
     
     router.get("/login", (request, response) => response.render("login"));
-    
+
     router.get("/new-account", (request, response) => {
         response.render("new-account", { message: "", name: "", password: "" });
     });
-    
     
     router.post("/new-account", async (request, response) => {
         try {
