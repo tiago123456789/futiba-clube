@@ -25,18 +25,21 @@ module.exports = (router) => {
     });
     
     router.post("/new-account", async (request, response) => {
+        const newAccount = request.body;
+        
         try {
-            const newAccount = request.body;
             const isExistUserEmail = userDAO.searchUserPerEmail(newAccount.email).length > 0;
             if (!isExistUserEmail) {
                 newAccount.role = "USER";
                 await userDAO.save(newAccount);
                 response.redirect("/new-account");
             } else {
-                response.render("new-account", { message: "Email já está em uso!", ...newAccount });
+                response.render("new-account", { message: "Email já está em uso!",
+                 name: newAccount.name, email: newAccount.email, password: newAccount.password });
             }
         } catch (e) {
-            console.log(e);
+            response.render("new-account", { message: e.message,
+                name: newAccount.name, email: newAccount.email, password: newAccount.password});
         }
     });
 

@@ -12,11 +12,11 @@ class UserDao extends DAO {
     }
 
     getColumnsSave() {
-        return ["name", "email", "senha", "role"];
+        return ["name", "email", "password", "role"];
     }
 
     getColumnsUpdate() {
-        return ["name", "email", "senha", "role"];
+        return ["name", "email", "password", "role"];
     }
 
 }
