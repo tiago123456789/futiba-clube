@@ -2,9 +2,8 @@ const express = require("express");
 const session = require("express-session");
 const bodyParser = require("body-parser");
 
+const routesApp = require("./routes/Index");
 const app = express();
-const UserDAO = require("./dao/UserDAO");
-const userDAO = new UserDAO();
 
 /**
  * @description Configure session in application.
@@ -30,41 +29,9 @@ app.use(express.static("public"));
  */
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get("/", async (request, response) => {
-    try {
-        const rows = await userDAO.findAll();
-        console.log(rows);
-        response.render("home");
-    } catch (e) {
-        console.log(e);
-    }
-
-});
-
-app.get("/login", (request, response) => {
-    response.render("login");
-});
-
-app.get("/new-account", (request, response) => {
-    response.render("new-account", { message: "", name: "", password: "" });
-});
-
-
-app.post("/new-account", async (request, response) => {
-    try {
-        const newAccount = request.body;
-        const isExistUserEmail = userDAO.searchUserPerEmail(newAccount.email).length > 0;
-        if (!isExistUserEmail) {
-            newAccount.role = "USER";
-            await userDAO.save(newAccount);
-            response.redirect("/new-account");
-        } else {
-            response.render("new-account", { message: "Email já está em uso!", ...newAccount });
-        }
-    } catch (e) {
-        console.log(e);
-    }
-});
-
+/**
+ * @description Defined routes application.
+ */
+routesApp({ app, express });
 
 app.listen(3000, () => console.log("Server ready!!!"));
