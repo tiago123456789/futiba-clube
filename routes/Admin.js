@@ -1,6 +1,8 @@
+const gamesRoute = require("./Games");
+
 module.exports = (router) => {
     
-    router.get("/", (request, response) => response.send("Panel Admin"));    
+    router.use("/games", gamesRoute(router));    
 
     return router;
 }
