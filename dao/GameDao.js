@@ -16,4 +16,4 @@ class GameDao extends DAO {
 
 }
 
-module.exports = UserDao;
+module.exports = GameDao;

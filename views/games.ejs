@@ -60,7 +60,7 @@
 
                                 <i class="fa fa-lock prefix grey-text"></i>
 
-                                <input type="password" id="orangeForm-pass" class="form-control"
+                                <input type="text" id="orangeForm-pass" class="form-control"
                                 name="team_b">
 
                                 <label for="orangeForm-pass">Time B:</label>
@@ -74,11 +74,12 @@
                             </div>
 
                 </form>
-                
+            
+            </div>
 
-                <div class="row">
+            <div class="row">
                     <div class="table-responsive">
-                        <table class="table">
+                        <table class="table table-striped text-center">
                             <thead>
                                 <tr>
                                     <th>Games</th>
@@ -87,13 +88,17 @@
                             <tbody>
                                 <% games.forEach(game => { %>
                                     <tr>
-                                        <td><%= game.team_a %> VS <%= game.team_b %></td>
+                                        <td>
+                                            <%= game.team_a %> 
+                                            <span style="font-weight: bolder; font-size: 1.2em;">VS</span>
+                                             <%= game.team_b %>
+                                        </td>
                                     </tr>     
                                 <% }) %>
                                     
                                 <% if (games.length == 0) { %>
                                     <tr>
-                                        Nenhum games criado ainda.
+                                        <td>Nenhum game criado ainda.</td>
                                     </tr>    
                                 <% } %>
                                 
@@ -101,7 +106,6 @@
                         </table>
                     </div>
                 </div>
-            </div>
         </div>
 
     </section>
