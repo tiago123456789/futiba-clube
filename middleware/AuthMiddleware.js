@@ -8,6 +8,15 @@ class AuthMiddleware {
             response.redirect("/home");
         }
     }
+
+    static isPermissionAccess(request, response, next) {
+        const { user } = request.session;
+        if (user) {
+            next();
+        } else {
+            response.redirect("/home");
+        }
+    }
 }
 
 
