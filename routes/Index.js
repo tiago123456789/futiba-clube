@@ -18,7 +18,7 @@ module.exports = ({ app, express }) => {
     });
 
     app.use("/users", userRouter(express.Router()));
-    app.use("/admin", AuthMiddleware.isPermissionAccessAdmin, adminRouter(express.Router()));
+    app.use("/admin", AuthMiddleware.isPermissionAccessAdmin, adminRouter(express));
     app.use("/home", (request, response) => response.render("home"));
 
   

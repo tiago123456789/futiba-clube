@@ -15,8 +15,8 @@ class DAO {
         const paramValuePreparedStatement = this.getColumnsSave().map(() => "?").join(", ");
         const valuesInReplaceNamedParameters = this.getColumnsSave()
                                                     .map((itens) => newContent[itens])
-                                                    .filter(itens => (itens != null || itens != undefined))
-        await connection
+                                                    .filter(itens => (itens != null || itens != undefined));
+        return await connection
                 .execute(
                     `INSERT INTO ${this.table}(${this.getColumnsSave().join(",")}) VALUES(${paramValuePreparedStatement})`,
                     valuesInReplaceNamedParameters
@@ -58,7 +58,6 @@ class DAO {
         const [rows, fields] = query;
         return rows;
     }
-
 }
 
 module.exports = DAO;

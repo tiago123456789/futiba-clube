@@ -1,3 +1,6 @@
+# FILES IGNORE IDE
+.idea
+
 # Logs
 logs
 *.log

@@ -1,11 +1,12 @@
 const gamesRoute = require("./Games");
-const groupRoute = require("./Group");
+const groupRoute = require("./Grupo");
 const AuthMiddleware = require("./../middleware/AuthMiddleware");
 
-module.exports = (router) => {
+module.exports = (express) => {
+    const router  = express.Router();
     
-    router.use("/games", gamesRoute(router));  
-    router.use("/grupos", AuthMiddleware.isPermissionAccess, groupRoute(router));  
+    router.use("/grupos", AuthMiddleware.isPermissionAccess, groupRoute(express.Router()));  
+    router.use("/games", gamesRoute(express.Router()));  
 
     return router;
 }

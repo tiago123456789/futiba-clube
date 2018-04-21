@@ -1,4 +1,4 @@
-const GameDao = require("./../dao/GameDao");
+const GameDao = require("../dao/GameDAO");
 const gameDAO = new GameDao();
 
 module.exports = (router) => {
