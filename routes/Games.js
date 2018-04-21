@@ -14,5 +14,11 @@ module.exports = (router) => {
         response.redirect("/admin/games");
     });
 
+    router.get("/:id/delete", async (request, response) => {
+        const id = request.params.id;
+        await gameDAO.delete(id);
+        response.redirect("/admin/games");
+    });
+
     return router;
 }
