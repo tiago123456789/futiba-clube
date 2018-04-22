@@ -11,6 +11,7 @@
     <li class="nav-item">
         <a class="nav-link" href="/classification">Classificação</a>
     </li>
+
     <% if (user) { %>
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
@@ -24,9 +25,11 @@
                 <a class="dropdown-item" href="/users/logout">Logout</a>
             </div>
         </li>
+    <% } else { %>
+        <li class="nav-item">
+            <a class="nav-link " href="/users/new-account" >Cadastrar-se</a>
+        </li>
     <% } %>
-
-
             <li class="nav-item">
                 <% if (user) { %>
                     <a class="nav-link" ><%= user.name %></a>                                

@@ -5,190 +5,129 @@
 
 <html lang="en">
 
-    <head>
+<head>
 
-        <meta charset="utf-8">
+    <meta charset="utf-8">
 
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-        <title>Futiba Club</title>
+    <title>Futiba Club</title>
 
-        <!-- Font Awesome -->
+    <!-- Font Awesome -->
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-        <!-- Bootstrap -->
+    <!-- Bootstrap -->
 
-        <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
 
-        <!-- Material Design Bootstrap -->
+    <!-- Material Design Bootstrap -->
 
-        <link href="/css/mdb.min.css" rel="stylesheet">
+    <link href="/css/mdb.min.css" rel="stylesheet">
 
-        <!-- Your Custom Styles -->
+    <!-- Your Custom Styles -->
 
-        <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
 
-        <link href="/css/futiba-interno.css" rel="stylesheet">
+    <link href="/css/futiba-interno.css" rel="stylesheet">
 
-    </head>
+</head>
 
-    <body>
+<body>
 
-        <header>
+<header>
 
-            <nav class="navbar navbar-expand-lg navbar-light green fixed-top scrolling-navbar">
+    <nav class="navbar navbar-expand-lg navbar-light green fixed-top scrolling-navbar">
 
-                <div class="container">
+        <div class="container">
 
-                    <a class="navbar-brand" href="/">
-                        <img src="/img-futiba-club/logo.png" height="30" alt="Futiba Club">
+            <a class="navbar-brand" href="/">
+                <img src="/img-futiba-club/logo.png" height="30" alt="Futiba Club">
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7"
+                    aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
+
+                <% include partials/menu %>
+
+            </div> <!-- Navbar Collapse -->
+
+        </div> <!-- Container -->
+
+    </nav> <!-- Navbar -->
+
+</header> <!-- Header -->
+
+<section class="content">
+
+    <div class="container">
+
+        <div class="row">
+            <h4><%= group.name %></h4>
+        </div>
+
+        <% if (users.length > 0) { %>
+            <table class="table table-striped text-center">
+
+            <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <% users.forEach( user => { %>
+            <tr>
+                <td>
+                    <%= user.name %>
+                </td>
+                <td style="text-transform: capitalize;"><%= user.role %></td>
+                <td>
+                    <a class="btn btn-sm btn-primary" href="/admin/grupos/<%= group.id %>/aceitar/<%= user.user_id %>"> <!-- Id of that relation groups -> users -->
+                        Permitir
                     </a>
 
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7"
-                        aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                    <a class="btn btn-sm btn-danger" href="/admin/grupos/<%= group.id %>/negar/<%= user.user_id %>">
+                        Negar
+                    </a>
 
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
+                </td>
+            </tr>
+            <% })%>
 
-                        <% include partials/menu %>
+            </tbody>
 
-                    </div> <!-- Navbar Collapse -->
+        </table>
+        <% } else { %>
+            <p style="font-weight: bold">Nenhum usuário pendente.</p>
+        <% } %>
 
-                </div> <!-- Container -->
+    </div> <!-- Container -->
 
-            </nav> <!-- Navbar -->
+</section> <!-- Content -->
 
-        </header> <!-- Header -->
+<!-- JQuery -->
 
-        <section class="content">
+<script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
 
-            <div class="container">
+<!-- Bootstrap Tool Tips -->
 
-                <div class="row">
-                    <h4><%= group.name %></h4>
-                </div>
+<script type="text/javascript" src="/js/popper.min.js"></script>
 
-                <!-- <% if(group.role === "owner") {%>
+<!-- Bootstrap Core Js -->
 
-                <% if (pendings.length > 0 ) { %> -->
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 
-                <table class="table table-striped">
+<!-- Mdb Code Js -->
 
-                    <thead>
-                        <tr>
-                            <th>Identificação</th>
+<script type="text/javascript" src="/js/mdb.min.js"></script>
 
-                            <th>Usuário</th>
-
-                            <th>Nome</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                    <% pendings.forEach( user => { %>
-                        <tr>
-                            <th scope="row"><%= user.id %></th>
-
-                            <td style="text-transform: capitalize;"><%= user.role %></td>
-
-                            <td>
-                                <a href="/groups/<%= user.id %>">
-                                    <%= user.name %>
-                                </a>
-                            </td>
-
-                            <td>
-
-                                <a href="/groups/<%= group.id %>/pending/<%= user.id %>/yes"> <!-- Id of that relation groups -> users -->
-                                    Permitir
-                                </a>
-
-                                <a href="/groups/<%= group.id %>/pending/<%= user.id %>/no">
-                                    Negar
-                                </a>
-
-                            </td>
-                        </tr>
-                    <% }) %>
-                    </tbody>
-
-                </table> <!-- Table Games -->
-
-                <% } else { %>
-                    <p class="alert alert-info row">Nenhum pedido pendente</p>
-                <% } %>
-
-                <% } %> <!-- Group.role -->
-
-                <% if (group.role === "pending") { %>
-                    <p class="alert alert-info row">Você precisa ser aprovado pelo dono do grupo</p>
-                <% } else { %>
-
-                <form method="post">
-
-                    <table class="table table-striped">
-
-                        <thead>
-                            <tr>
-                                <th>Jogo</th>
-                                <th>Pontuação</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                        <% games.forEach( game => { %>
-                            <tr>
-                                <td>
-                                    <% if(game.guess_a) { %>
-                                        <p style="color: #00C851; display: inline;"><%= game.guess_a %></p>
-                                    <% } else { %>
-                                        <input class="form-control" name="team_<%= game.id %>[a]">
-                                    <% } %>
-                                        <%= game.team_a %> Vs <%= game.team_b %>
-                                    <% if(game.guess_b) { %>
-                                        <p style="color: #FF9961; display: inline;"><%= game.guess_b %></p>
-                                    <% } else { %>
-                                        <input class="form-control" name="team_<%= game.id %>[b]">
-                                    <% } %>
-                                </td>
-
-                                <td>
-                                    <%= game.score %>
-                                </td>
-                            </tr>
-                        <% }) %>
-                        </tbody>
-
-                    </table> <!-- Table Games \ Group -->
-
-                    <input type="submit" value="Salvar" class="btn btn-success btn-md">
-
-                </form>
-
-                <% } %>
-
-            </div> <!-- Container -->
-
-        </section> <!-- Content -->
-
-        <!-- JQuery -->
-
-        <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
-
-        <!-- Bootstrap Tool Tips -->
-
-        <script type="text/javascript" src="/js/popper.min.js"></script>
-
-        <!-- Bootstrap Core Js -->
-
-        <script type="text/javascript" src="/js/bootstrap.min.js"></script>
-
-        <!-- Mdb Code Js -->
-
-        <script type="text/javascript" src="/js/mdb.min.js"></script>
-
-    </body>
+</body>
 
 </html>

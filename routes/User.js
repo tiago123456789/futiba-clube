@@ -18,10 +18,10 @@ module.exports = (router) => {
         } else {
             response.render("login", { "error": "Email ou senha inválido!" });
         }
-    })
+    });
 
     router.get("/new-account", (request, response) => {
-        response.render("new-account", { message: "", name: "", password: "" });
+        response.render("new-account", { message: "", email: "", name: "", password: "" });
     });
     
     router.post("/new-account", async (request, response) => {

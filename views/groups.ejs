@@ -86,42 +86,34 @@
         </form> <!-- Form Games -->
 
         <% if (groups.length > 0 ) { %>
-
-        <table class="table table-striped">
+        <table class="table table-striped text-center">
 
             <thead>
             <tr>
-                <!-- <th>Identificação</th> -->
-
-                <th>Status</th>
-
                 <th>Nome</th>
+                <th>Status</th>
             </tr>
             </thead>
 
             <tbody>
             <% groups.forEach( group => { %>
             <tr>
-                <!-- <th scope="row"><%= group.id %></th> --> <!-- Identificação -->
-
-                <td style="text-transform: capitalize;"><%= group.role %></td>
-
                 <td>
-                    <a href="/groups/<%= group.id %>">
+                    <a href="/admin/grupos/<%= group.id %>">
                         <%= group.name %>
                     </a>
                 </td>
-
+                <td style="text-transform: capitalize;"><%=  (group.user_id == user.id ? group.role : '') %></td>
                 <td>
 
-                    <% if (group.role === "owner") { %>
-                    <a href="/admin/group/delete/<%= group.id %>">
+                    <% if (group.role === "OWNER" && group.user_id == user.id) { %>
+                    <a href="/admin/grupos/<%= group.id %>/delete"  class="btn btn-sm btn-danger">
                         Excluir
                     </a>
                     <% } %>
 
-                    <% if(!group.role) { %>
-                    <a href="/groups/<%= group.id %>/join">
+                    <% if(group.user_id != user.id) { %>
+                    <a href="/admin/grupos/<%= group.id %>/join" class="btn btn-sm btn-primary">
                         Entrar
                     </a>
                     <% } %>

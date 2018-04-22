@@ -1,6 +1,5 @@
 const userRouter = require("./User");
 const adminRouter = require("./Admin");
-const AuthMiddleware = require("./../middleware/AuthMiddleware");
 
 module.exports = ({ app, express }) => {
 
@@ -18,7 +17,7 @@ module.exports = ({ app, express }) => {
     });
 
     app.use("/users", userRouter(express.Router()));
-    app.use("/admin", AuthMiddleware.isPermissionAccessAdmin, adminRouter(express));
+    app.use("/admin", adminRouter(express));
     app.use("/home", (request, response) => response.render("home"));
 
   
