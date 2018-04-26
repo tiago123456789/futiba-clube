@@ -2,10 +2,16 @@ const GameDao = require("../dao/GameDAO");
 const gameDAO = new GameDao();
 
 module.exports = (router) => {
-    
+
     router.get("/", async (request, response) => {
         const games = await gameDAO.findAll();
-        response.render("games", { error: "", games }) 
+        response.render("games", { error: "", games })
+    });
+
+    router.post("/results", async (request, response) => {
+        const game = request.body;
+        await gameDAO.update(game, game.id);
+        response.redirect("/admin/games");
     });
 
     router.post("/", async (request, response) => {
@@ -21,4 +27,4 @@ module.exports = (router) => {
     });
 
     return router;
-}
+};

@@ -1,137 +1,127 @@
 <% include ./partials/header.ejs %>
 
-    <header>
+<header>
 
-        <nav class="navbar navbar-expand-lg navbar-light green fixed-top scrolling-navbar">
-
-            <div class="container">
-
-                <a class="navbar-brand" href="/">
-                    <img src="/img-futiba-club/logo.png" height="30" alt="Futiba Club">
-                </a>
-
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
-
-                    <% include ./partials/menu.ejs %>
-                </div>
-                <!-- Navbar Collapse -->
-
-            </div>
-            <!-- Container -->
-
-        </nav>
-        <!-- Navbar -->
-
-    </header>
-    <!-- Header -->
-
-    <section class="content">
+    <nav class="navbar navbar-expand-lg navbar-light green fixed-top scrolling-navbar">
 
         <div class="container">
 
-            <div class="row">
+            <a class="navbar-brand" href="/">
+                <img src="/img-futiba-club/logo.png" height="30" alt="Futiba Club">
+            </a>
 
-                <form class="col" method="post" action="/admin/games">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                    <% if (error) { %>
-                        <div class="alert alert-danger">
-                            <strong>
-                                <%= error %>
-                            </strong>
-                        </div>
-                        <% } %>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
 
-                            <div class="md-form">
-
-                                <i class="fa fa-envelope prefix grey-text"></i>
-
-                                <input type="text" id="orangeForm-email" class="form-control" name="team_a">
-
-                                <label for="orangeForm-email">Time A:</label>
-
-                            </div>
-
-                            <div class="md-form">
-
-                                <i class="fa fa-lock prefix grey-text"></i>
-
-                                <input type="text" id="orangeForm-pass" class="form-control"
-                                name="team_b">
-
-                                <label for="orangeForm-pass">Time B:</label>
-
-                            </div>
-
-                            <div class="text-center">
-
-                                <button class="btn btn-deep-orange">Cadastrar</button>
-
-                            </div>
-
-                </form>
-            
+                <% include ./partials/menu.ejs %>
             </div>
+            <!-- Navbar Collapse -->
 
-            <div class="row">
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Games</th>
-                                    <th>Ações</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <% games.forEach(game => { %>
-                                    <tr>
-                                        <td>
-                                            <%= game.team_a %> 
-                                            <span style="font-weight: bolder; font-size: 1.2em;">X</span>
-                                             <%= game.team_b %>
-                                        </td>
-                                        <td>
-                                            <a href="/admin/games/<%= game.id %>/delete"
-                                                 class="btn btn-sm btn-danger">Deletar</a>
-                                        </td>
-                                    </tr>     
-                                <% }) %>
-                                    
-                                <% if (games.length == 0) { %>
-                                    <tr>
-                                        <td>Nenhum game criado ainda.</td>
-                                    </tr>    
-                                <% } %>
-                                
-                            </tbody>
-                        </table>
-                    </div>
+        </div>
+        <!-- Container -->
+
+    </nav>
+    <!-- Navbar -->
+
+</header>
+<!-- Header -->
+
+<section class="content">
+
+    <div class="container">
+
+        <div class="row">
+
+            <form class="col" method="post" action="/admin/games">
+
+                <% if (error) { %>
+                <div class="alert alert-danger">
+                    <strong>
+                        <%= error %>
+                    </strong>
                 </div>
+                <% } %>
+
+                <div class="md-form">
+
+                    <i class="fa fa-envelope prefix grey-text"></i>
+
+                    <input type="text" id="orangeForm-email" class="form-control" name="team_a">
+
+                    <label for="orangeForm-email">Time A:</label>
+
+                </div>
+
+                <div class="md-form">
+
+                    <i class="fa fa-lock prefix grey-text"></i>
+
+                    <input type="text" id="orangeForm-pass" class="form-control"
+                           name="team_b">
+
+                    <label for="orangeForm-pass">Time B:</label>
+
+                </div>
+
+                <div class="text-center">
+
+                    <button class="btn btn-deep-orange">Cadastrar</button>
+
+                </div>
+
+            </form>
+
         </div>
 
-    </section>
-    <!-- Content -->
+        <div class="row">
+            <% games.forEach((game) => { %>
+                <div class="col-md-12 jumbotron">
+                    <form action="/admin/games/results" method="post">
+                        <input type="hidden" name="id" value="<%= game.id %>">
+                        <div class="col-md-7" style="display: inline-block  ">
+                            <input type="number"
+                                   name="result_a"
+                                   value="<%= (game.result_a ? game.result_a : '0')%>" min="0"
+                                   class="col-md-2">
+                            <%= game.team_a %> <span style="font-weight: bold">x</span> <%= game.team_b %>
+                            <input type="number"
+                                   name="result_b"
+                                   value="<%= (game.result_b ? game.result_b : '0')%>" min="0"
+                                   class="col-md-2">
+                        </div>
+                        <div class="col-md-4"  style="display: inline-block ">
+                            <a href="" class="btn btn-sm btn-danger">Deletar</a>
+                            <button type="submit" class="btn btn-sm btn-primary">Salvar Resultado</button>
+                        </div>
+                    </form>
+                </div>
+            <% })%>
+        </div>
+    </div>
 
-    <!-- JQuery -->
+</section>
+<!-- Content -->
 
-    <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
+<!-- JQuery -->
 
-    <!-- Bootstrap Tool Tips -->
+<script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
 
-    <script type="text/javascript" src="/js/popper.min.js"></script>
+<!-- Bootstrap Tool Tips -->
 
-    <!-- Bootstrap Core Js -->
+<script type="text/javascript" src="/js/popper.min.js"></script>
 
-    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<!-- Bootstrap Core Js -->
 
-    <!-- Mdb Code Js -->
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 
-    <script type="text/javascript" src="/js/mdb.min.js"></script>
+<!-- Mdb Code Js -->
 
-    </body>
+<script type="text/javascript" src="/js/mdb.min.js"></script>
 
-    </html>
+</body>
+
+</html>

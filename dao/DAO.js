@@ -39,10 +39,12 @@ class DAO {
     }
 
     async update(contentModified, id) {
+        const connection = await this.getConexao();
         const columnsUpdatedPreparedStatement = (this.getColumnsUpdate().join("= ?, ")).concat("= ?");
-        const valuesInReplaceNamedParameters = this.getColumnsSave()
-                                                    .map((itens) => newContent[itens])
+        const valuesInReplaceNamedParameters = this.getColumnsUpdate()
+                                                    .map((itens) => contentModified[itens])
                                                     .filter(itens => (itens != null || itens != undefined))
+
         await connection
                 .execute(
                     `UPDATE ${this.table} SET ${columnsUpdatedPreparedStatement} WHERE id = ? `,
