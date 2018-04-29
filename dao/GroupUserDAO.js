@@ -21,6 +21,12 @@ class GroupUserDAO extends DAO {
 
     }
 
+    async findByIdGroupAndUserOwner(idGroup) {
+        const connection = await this.getConexao();
+        return this.extractRegisterQuery(await connection.execute(`SELECT * FROM groups_users AS gu 
+        WHERE gu.group_id = ? AND gu.role = ?`, [idGroup, 'OWNER']));
+    }
+
     async aceitarUsuarioNoGrupo(idGroup, idUser) {
         const connection = await this.getConexao();
         await connection.execute("UPDATE groups_users SET role = ? WHERE user_id = ? AND group_id = ?",

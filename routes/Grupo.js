@@ -1,8 +1,10 @@
 const GroupUserDAO = require("./../dao/GroupUserDAO");
+const GameDAO = require("./../dao/GameDAO");
 const GrupoDAO = require("./../dao/GrupoDAO");
 
 const groupUserDAO = new GroupUserDAO();
 const grupoDAO = new GrupoDAO();
+const gameDAO = new GameDAO();
 
 module.exports = (router) => {
     
@@ -27,7 +29,14 @@ module.exports = (router) => {
         const id = request.params.id;
         const group = await grupoDAO.findById(id);
         const registersPendenting = await groupUserDAO.findAllByIdGroupAndRole(id, 'PENDENTING');
-        response.render("group", { group: group[0], users: registersPendenting });
+        const isUserOwnerGroup = await groupUserDAO.findByIdGroupAndUserOwner(id);
+        const games = await gameDAO.findAll();
+        response.render("group", {
+            group: group[0],
+            users: registersPendenting,
+            isOwner: isUserOwnerGroup,
+            games
+        });
     });
 
     router.get("/:id/delete", async (request, response) => {
