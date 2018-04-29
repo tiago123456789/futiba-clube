@@ -115,32 +115,36 @@
                 <thead>
                 <tr>
                     <th>Partida</th>
+                    <th>Pontuação</th>
                     <th>Ações</th>
                 </tr>
                 </thead>
                 <tbody>
                 <% games.forEach((game) => { %>
                 <tr>
-                    <td>
-                        <form action="/admin/adivinhacoes/" method="post">
+                    <form action="/admin/adivinhacoes" method="post">
+                        <td>
                             <input type="hidden" name="game" value="<%= game.id %>"/>
                             <input type="hidden" name="group" value="<%= group.id %>"/>
                             <div class="row text-center" style="padding-left: 20px">
-                                <input type="number" min="1" name="result_a" value="0"
+                                <input type="number" min="1" name="result_a" value="<%= (game.adivinhacao.result_a ? game.adivinhacao.result_a : 0) %>"
                                        class="form-control col-md-2" style="display: inline-block"/>
                                 <p class="col-md-4" style="margin-top: 20px;">
                                     <%= game.team_a %>
                                     <span style="font-weight: bold">x</span>
                                     <%= game.team_b %>
                                 </p>
-                                <input type="number" min="1" name="result_b" value="0"
+                            <input type="number" min="1" name="result_b" value="<%= (game.adivinhacao.result_b ? game.adivinhacao.result_b : 0) %>"
                                        class="form-control col-md-2"  style="display: inline-block"/>
                             </div>
-                        </form>
-                    </td>
-                    <td>
-                        <button class="btn btn-sm btn-primary">Dar palpite</button>
-                    </td>
+                        </td>
+                        <td>
+                            <%= (game.adivinhacao.score ? game.adivinhacao.score : 0)%>
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-primary">Dar palpite</button>
+                        </td>
+                    </form>
                 </tr>
                 <% }) %>
 

@@ -1,10 +1,12 @@
 const GroupUserDAO = require("./../dao/GroupUserDAO");
 const GameDAO = require("./../dao/GameDAO");
 const GrupoDAO = require("./../dao/GrupoDAO");
+const AdivinhacaoDAO = require("./../dao/AdivinhacaoDAO");
 
 const groupUserDAO = new GroupUserDAO();
 const grupoDAO = new GrupoDAO();
 const gameDAO = new GameDAO();
+const adivinhacaoDAO = new AdivinhacaoDAO();
 
 module.exports = (router) => {
     
@@ -27,15 +29,31 @@ module.exports = (router) => {
 
     router.get("/:id", async (request, response) => {
         const id = request.params.id;
+        const idUser = request.session.user.id;
         const group = await grupoDAO.findById(id);
         const registersPendenting = await groupUserDAO.findAllByIdGroupAndRole(id, 'PENDENTING');
         const isUserOwnerGroup = await groupUserDAO.findByIdGroupAndUserOwner(id);
         const games = await gameDAO.findAll();
+        let gamesWithGuessings = games.map(game => {
+            return adivinhacaoDAO
+                    .findByIdGameAndIdUser(game.id, idUser)
+                    .then((adivinhacao) => {
+                        adivinhacao = adivinhacao[0] || {};
+                        game.adivinhacao = {
+                            score: adivinhacao.score,
+                            result_a: adivinhacao.result_a,
+                            result_b: adivinhacao.result_b
+                        };
+                        return game;
+                    });
+        });
+
+        gamesWithGuessings = await Promise.all(gamesWithGuessings);
         response.render("group", {
             group: group[0],
             users: registersPendenting,
             isOwner: isUserOwnerGroup,
-            games
+            games: gamesWithGuessings
         });
     });
 

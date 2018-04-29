@@ -16,6 +16,7 @@ class DAO {
         const valuesInReplaceNamedParameters = this.getColumnsSave()
                                                     .map((itens) => newContent[itens])
                                                     .filter(itens => (itens != null || itens != undefined));
+
         return await connection
                 .execute(
                     `INSERT INTO ${this.table}(${this.getColumnsSave().join(",")}) VALUES(${paramValuePreparedStatement})`,

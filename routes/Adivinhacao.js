@@ -12,8 +12,8 @@ module.exports = (router) => {
         const novaAdivinhacao = request.body;
         const game = await gameDAO.findById(novaAdivinhacao.game);
         const score = scoreService.getScore(
-            game,
-            { result_a: novaAdivinhacao.result_a, result_b: novaAdivinhacao.result_b });
+            { result_a: parseInt(game[0].result_a), result_b: parseInt(game[0].result_b) },
+            { result_a: parseInt(novaAdivinhacao.result_a), result_b: parseInt(novaAdivinhacao.result_b) });
         novaAdivinhacao.score = score;
         await adivinhacaoDAO.save({
             result_a: novaAdivinhacao.result_a,
@@ -23,6 +23,8 @@ module.exports = (router) => {
             group_id: novaAdivinhacao.group,
             user_id: request.session.user.id
         });
-        response.redirect("/admin/grupos/" + novaAdivinhacao.grupo);
+        response.redirect("/admin/grupos/" + novaAdivinhacao.group);
     });
+
+    return router;
 };
