@@ -3,7 +3,7 @@ const userDAO = new UserDAO();
 
 module.exports = (router) => {
     
-    router.get("/logout", (request, response) => request.session.destroy(() => response.redirect("/home")));
+    router.get("/logout", (srequest, response) => request.session.destroy(() => response.redirect("/home")));
 
     router.get("/login", (request, response) => response.render("login", { "error": "" }));
 
