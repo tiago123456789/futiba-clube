@@ -39,6 +39,12 @@ class GroupUserDAO extends DAO {
             [idUser, idGroup]);
     }
 
+    async deleteAllRegisterRelatedGroup(idGroup) {
+        const connection = await this.getConexao();
+        await connection.execute("DELETE FROM groups_users WHERE group_id = ?",
+            [idGroup]);
+    }
+
     getColumnsSave() {
         return ["user_id", "group_id", "role"];
     }

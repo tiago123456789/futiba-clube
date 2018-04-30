@@ -63,7 +63,11 @@
 <section class="content">
 
     <div class="container">
-
+        <% if(error) { %>
+            <div class="alert alert-danger">
+                <strong><%= error %></strong>
+            </div>
+        <% } %>
         <form class="row" method="post">
 
             <div class="col-md-12">
@@ -84,8 +88,7 @@
             </div>
 
         </form> <!-- Form Games -->
-
-        <% if (groups.length > 0 ) { %>
+        <% if (groups.length > 0)  { %>
         <table class="table table-striped text-center">
 
             <thead>

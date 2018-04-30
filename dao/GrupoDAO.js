@@ -6,6 +6,13 @@ class GrupoDAO extends DAO {
         super("groups");
     }
 
+    async findByName(name) {
+        const connection = await this.getConexao();
+        return this.extractRegisterQuery(
+            await connection.execute(`SELECT * FROM ${this.table} WHERE name = ?`, [name])
+        );
+    }
+
     getColumnsSave() {
         return ["name"];
     }
