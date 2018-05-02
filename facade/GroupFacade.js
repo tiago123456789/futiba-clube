@@ -31,7 +31,7 @@ class GroupFacade {
         const userPendenting = await this._groupUserService.findAllByIdGroupAndRole(idGroup, 'PENDENTING');
         const userOwnerOfGroup = await this._groupUserService.findByIdGroupAndUserOwner(idGroup);
         const games = await this._getGames(idUser);
-        return { group: group[0], user: userPendenting, isOwner: userOwnerOfGroup, games };
+        return { group: group[0], users: userPendenting, isOwner: userOwnerOfGroup, games };
     }
 
     async _getGames(idUser) {

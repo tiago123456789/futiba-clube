@@ -89,12 +89,12 @@
                 </td>
                 <td style="text-transform: capitalize;"><%= userItem.role %></td>
                 <td>
-                    <% if (isOwner[0] && isOwner[0].id == user.id) { %>
-                    <a class="btn btn-sm btn-primary" href="/admin/grupos/<%= group.id %>/aceitar/<%= user.user_id %>"> <!-- Id of that relation groups -> users -->
+                    <% if (isOwner[0] && isOwner[0].user_id == user.id) { %>
+                    <a class="btn btn-sm btn-primary" href="/admin/grupos/<%= group.id %>/aceitar/<%= userItem.user_id %>"> <!-- Id of that relation groups -> users -->
                         Permitir
                     </a>
 
-                    <a class="btn btn-sm btn-danger" href="/admin/grupos/<%= group.id %>/negar/<%= user.user_id %>">
+                    <a class="btn btn-sm btn-danger" href="/admin/grupos/<%= group.id %>/negar/<%= userItem.user_id %>">
                         Negar
                     </a>
                     <% } %>

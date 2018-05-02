@@ -4,8 +4,8 @@ class AdivinhacaoService {
         this._adivinhacaoDao = adivinhacaoDao;
     }
 
-    async findByIdGameAndIdUser() {
-        return await this._adivinhacaoDao.findByIdGameAndIdUser();
+    async findByIdGameAndIdUser(idGame, idUser) {
+        return await this._adivinhacaoDao.findByIdGameAndIdUser(idGame, idUser);
     }
 }
 

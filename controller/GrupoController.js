@@ -27,7 +27,7 @@ class GrupoController {
         try {
             const group = await this._grupoService.save(newGroup);
             await this._grupoUserService.save(
-                { user_id: idUser, group_id: group[0].insertId, role: "OWNER"})
+                { user_id: idUser, group_id: group[0].insertId, role: "OWNER"});
             return response.redirect("/admin/grupos/");
         } catch (e) {
             console.log(e);
