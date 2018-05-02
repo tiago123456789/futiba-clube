@@ -35,8 +35,8 @@
     <div class="container">
 
         <div class="row">
-
-            <form class="col" method="post" action="/admin/games">
+            <h1 class="title">Nova Partida:</h1>
+            <form class="col-md-12" method="post" action="/admin/games">
 
                 <% if (error) { %>
                 <div class="alert alert-danger">
@@ -78,6 +78,7 @@
         </div>
 
         <div class="row">
+            <h3>Partidas:</h3>
             <% games.forEach((game) => { %>
                 <div class="col-md-12 jumbotron">
                     <form action="/admin/games/results" method="post">
@@ -94,8 +95,10 @@
                                    class="col-md-2">
                         </div>
                         <div class="col-md-4"  style="display: inline-block ">
-                            <a href="" class="btn btn-sm btn-danger">Deletar</a>
-                            <button type="submit" class="btn btn-sm btn-primary">Salvar Resultado</button>
+                            <a href="/admin/games/<%= game.id %>/delete" class="btn btn-sm btn-danger">Deletar</a>
+                            <% if (game.result_a == null && game.result_b == null) { %>
+                                <button type="submit" class="btn btn-sm btn-primary">Salvar Resultado</button>
+                            <% } %>
                         </div>
                     </form>
                 </div>

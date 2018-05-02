@@ -1,30 +1,17 @@
 const GameDao = require("../dao/GameDAO");
+const GameService = require("../service/GameService");
+const GameController = require("../controller/GameController");
+
 const gameDAO = new GameDao();
+const gameService = new GameService(gameDAO);
+const gameController = new GameController(gameService);
 
 module.exports = (router) => {
 
-    router.get("/", async (request, response) => {
-        const games = await gameDAO.findAll();
-        response.render("games", { error: "", games })
-    });
-
-    router.post("/results", async (request, response) => {
-        const game = request.body;
-        await gameDAO.update(game, game.id);
-        response.redirect("/admin/games");
-    });
-
-    router.post("/", async (request, response) => {
-        const newGame = request.body;
-        await gameDAO.save(newGame);
-        response.redirect("/admin/games");
-    });
-
-    router.get("/:id/delete", async (request, response) => {
-        const id = request.params.id;
-        await gameDAO.delete(id);
-        response.redirect("/admin/games");
-    });
+    router.get("/", gameController.index);
+    router.post("/results", gameController.saveResultGame);
+    router.post("/", gameController.save);
+    router.get("/:id/delete", gameController.delete);
 
     return router;
 };
