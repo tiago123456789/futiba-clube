@@ -1,6 +1,6 @@
 class ScoreService {
 
-    getScore(game, palpite) {
+    static getScore(game, palpite) {
         let score = 0;
 
         if (game.result_a == palpite.result_a && game.result_b == palpite.result_b) {

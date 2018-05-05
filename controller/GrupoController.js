@@ -14,6 +14,12 @@ class GrupoController {
         this.juntarAoGrupo = this.juntarAoGrupo.bind(this);
         this.confirmarEntraAoGrupo = this.confirmarEntraAoGrupo.bind(this);
         this.rejeitarEntradaAoGrupo = this.rejeitarEntradaAoGrupo.bind(this);
+        this.classification = this.classification.bind(this);
+    }
+
+    async classification(request, response) {
+        const classifications = await this._grupoService.getClassification();
+        response.render("classification", { classifications })
     }
 
     async index(request, response) {

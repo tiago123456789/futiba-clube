@@ -1,51 +1,41 @@
+<% include ./partials/header.ejs %>
 
-<!DOCTYPE html>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light green fixed-top scrolling-navbar">
 
-<html lang="en" class="full-height">
+        <div class="container">
 
-    <head>
+            <a class="navbar-brand" href="/">
+                <img src="/img-futiba-club/logo.png" height="30" alt="Futiba Club">
+            </a>
 
-        <link rel="shortcut icon" type="image/png" href="https://i.imgur.com/Tlyy9su.png"/>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <meta charset="utf-8">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
 
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                <% include ./partials/menu.ejs %>
+            </div>
+            <!-- Navbar Collapse -->
 
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        </div>
+        <!-- Container -->
 
-        <title>Futiba Club</title>
+    </nav>
 
-        <!-- Font Awesome -->
+</header>
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-        <!-- Bootstrap -->
-
-        <link href="/css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- Material Design Bootstrap -->
-
-        <link href="/css/mdb.min.css" rel="stylesheet">
-
-        <!-- Custom Styles -->
-
-        <link href="/css/style.css" rel="stylesheet">
-
-        <link href="/css/futiba.css" rel="stylesheet">
-
-    </head>
-
-    <body style="background: #5ab342;">
-
-        <section >
+<section class="content" >
 
             <div class="container">
 
-                <h2>Classificação - <a href="/"style="color: #fff;">Home</a></h2>
+                <h2>Classificação:</h2>
 
-                <% if(top) { %>
+                <% if(classifications) { %>
 
-                <table class="table table-striped">
+                <table class="table table-striped text-center">
 
                     <thead>
 
@@ -59,13 +49,13 @@
 
                     <tbody>
 
-                        <% top.forEach(item => { %>
+                        <% classifications.forEach(item => { %>
 
                         <tr>
 
                             <td><%= item.name %></td>
 
-                            <td><%= item.score %></td>
+                            <td><%= (item.score ? item.score : 0) %></td>
                         </tr>
 
                         <% }) %>
@@ -84,4 +74,3 @@
 
         </section> <!-- Section -->
 
-    <% include elements/footer %>

@@ -8,6 +8,10 @@ class GameService {
         return await this._gameDao.findAll();
     }
 
+    async findById(id) {
+        return await this._gameDao.findById(id);
+    }
+
     update(game, id) {
         this._gameDao.update(game, id);
     }

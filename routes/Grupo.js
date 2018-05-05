@@ -11,7 +11,8 @@ const groupService = new GroupService(grupoDAO);
 const groupController = new GroupController(groupService, groupUserService);
 
 module.exports = (router) => {
-    
+
+    router.get("/classificacoes", groupController.classification);
     router.get("/", groupController.index);
     router.post("/", groupController.create);
     router.get("/:id", groupController.findOne);

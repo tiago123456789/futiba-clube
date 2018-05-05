@@ -19,6 +19,10 @@ class GroupService {
         return await this._groupDao.findById(id);
     }
 
+    async getClassification() {
+        return await this._groupDao.getClassification();
+    }
+
     async delete(id) {
         await this._groupDao.delete(id);
     }
