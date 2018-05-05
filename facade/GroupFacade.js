@@ -30,15 +30,15 @@ class GroupFacade {
         const group = await this._groupService.findById(idGroup);
         const userPendenting = await this._groupUserService.findAllByIdGroupAndRole(idGroup, 'PENDENTING');
         const userOwnerOfGroup = await this._groupUserService.findByIdGroupAndUserOwner(idGroup);
-        const games = await this._getGames(idUser);
+        const games = await this._getGames(idUser, idGroup);
         return { group: group[0], users: userPendenting, isOwner: userOwnerOfGroup, games };
     }
 
-    async _getGames(idUser) {
+    async _getGames(idUser, idGroup) {
         const games = await this._gameService.findAll();
         let gamesWithGuessings = games.map((game) => {
             return adivinhacaoService
-                .findByIdGameAndIdUser(game.id, idUser)
+                .findByIdGameAndIdUserAndIdGroup(game.id, idUser, idGroup)
                 .then((adivinhacao) => {
                     adivinhacao = adivinhacao[0] || {};
                     game.adivinhacao = {

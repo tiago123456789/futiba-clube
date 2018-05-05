@@ -6,12 +6,12 @@ class AdivinhacaoDAO extends DAO {
         super("guessings");
     }
 
-    async findByIdGameAndIdUser(idGame, idUser) {
+    async findByIdGameAndIdUserAndIdGroup(idGame, idUser, idGroup) {
         const connection = await this.getConexao();
         return this.extractRegisterQuery(
             await connection.execute(
-                `SELECT * FROM ${this.table} WHERE game_id = ? AND user_id = ? `,
-                [idGame, idUser]
+                `SELECT * FROM ${this.table} WHERE game_id = ? AND user_id = ? AND group_id = ? `,
+                [idGame, idUser, idGroup]
             )
         );
     }
