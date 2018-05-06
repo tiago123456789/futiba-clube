@@ -143,7 +143,7 @@
                         </td>
                         <td>
                             <button class="btn btn-sm btn-primary">Dar palpite</button>
-                            <a class="btn btn-sm btn-default"
+                            <a href="#" class="btn btn-sm btn-default btn_show_modal_comentarios"
                                data-toggle="modal" data-target="#modal_comentarios">Comentários</a>
                         </td>
                     </form>
@@ -169,37 +169,17 @@
                     <div class="col-md-12">
                         <form action="" method="post">
                             <div class="md-form">
-
                                 <i class="fa fa-comment prefix grey-text"></i>
-
                                 <input type="text" class="form-control" name="name">
                                 <label for="orangeForm-name">Comentário:</label>
                             </div>
-
+                            <div class="md-form">
+                                <button type="submit" class="btn btn-sm btn-primary">
+                                    <i class="fa fa-save"></i> &nbsp;
+                                    Salvar
+                                </button>
+                            </div>
                         </form>
-                    </div>
-                    <div class="col-md-12 border " style="padding: 5px; margin-bottom: 10px">
-                        <p class="text-justify">Toggle a working modal demo by clicking the button below. It will slide down and fade in from the top of the page.</p>
-                        <span class="font-bold">
-                                                    <i class="fa fa-user-circle"></i>
-
-                            Tiago Rosa da costa </span>
-                    </div>
-
-                    <div class="col-md-12 border " style="padding: 5px; margin-bottom: 10px">
-                        <p class="text-justify">Toggle a working modal demo by clicking the button below. It will slide down and fade in from the top of the page.</p>
-                        <span class="font-bold">
-                                                    <i class="fa fa-user-circle"></i>
-
-                            Tiago Rosa da costa </span>
-                    </div>
-
-                    <div class="col-md-12 border " style="padding: 5px; margin-bottom: 10px">
-                        <p class="text-justify">Toggle a working modal demo by clicking the button below. It will slide down and fade in from the top of the page.</p>
-                        <span class="font-bold">
-                                                    <i class="fa fa-user-circle"></i>
-
-                            Tiago Rosa da costa </span>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -227,6 +207,53 @@
 
 <script type="text/javascript" src="/js/mdb.min.js"></script>
 
+<script type="text/javascript">
+
+    const montarListaComentarios = (comentarios) => {
+        const elementosHtmlDeComentarios = comentarios.map(item => {
+            return `
+                <div class="col-md-12 border " style="padding: 5px; margin-bottom: 10px">
+                        <p class="text-justify">${item.comentario}</p>
+                        <span class="font-bold">
+                            <i class="fa fa-user-circle"></i>
+                               ${item.user.name}
+                        </span>
+                </div>`
+        }).join("");
+
+        $("#modal_comentarios .modal-body").append(elementosHtmlDeComentarios);
+
+    }
+
+    class ComentarioService {
+
+        constructor() {
+            this._url = "http://localhost:3000/admin/adivinhacoes/1/comentarios";
+        }
+
+        getComentarios() {
+            $.ajax({ url: this._url, method: "GET", success: function(datas) {
+                    console.log(datas);
+                    montarListaComentarios(datas);
+                }
+            })
+        }
+
+        save(comentario) {
+
+        }
+
+    }
+
+    const $btnModalComentarios = $(".btn_show_modal_comentarios");
+
+    $btnModalComentarios.click(function(event) {
+        new ComentarioService().getComentarios();
+    });
+
+
+
+</script>
 </body>
 
 </html>
