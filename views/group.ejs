@@ -144,7 +144,7 @@
                         <td>
                             <button class="btn btn-sm btn-primary">Dar palpite</button>
                             <a href="#" class="btn btn-sm btn-default btn_show_modal_comentarios"
-                               data-toggle="modal" data-target="#modal_comentarios">Comentários</a>
+                               data-toggle="modal" data-target="#modal_comentarios" data-guessing="<%= game.adivinhacao.id_guessing %>">Comentários</a>
                         </td>
                     </form>
                 </tr>
@@ -227,8 +227,8 @@
 
     class ComentarioService {
 
-        constructor() {
-            this._url = "http://localhost:3000/admin/adivinhacoes/1/comentarios";
+        constructor(idGuessing) {
+            this._url = `http://localhost:3000/admin/adivinhacoes/${idGuessing}/comentarios`;
         }
 
         getComentarios() {
@@ -248,7 +248,8 @@
     const $btnModalComentarios = $(".btn_show_modal_comentarios");
 
     $btnModalComentarios.click(function(event) {
-        new ComentarioService().getComentarios();
+        const idGuessing = $(this).data("guessing");
+        new ComentarioService(idGuessing).getComentarios();
     });
 
 

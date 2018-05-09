@@ -1,32 +1,24 @@
 const AdivinhacaoFacade = require("./../facade/AdivinhacaoFacade");
 const AdivinhacaoController = require("./../controller/AdivinhacaoController");
 
-const adivinhacaoController  = new AdivinhacaoController(new AdivinhacaoFacade());
+const ComentarioDAO = require("./../dao/ComentarioDAO");
+const ComentarioService = require("./../service/ComentarioService");
+
+const adivinhacaoController = new AdivinhacaoController(new AdivinhacaoFacade());
+const comentarioDao = new ComentarioDAO();
+const comentarioService = new ComentarioService(comentarioDao);
 
 module.exports = (router) => {
 
     router.post("/", adivinhacaoController.save);
-    router.get("/:id/comentarios", (request, response) => {
-        const comentarios = [
-            {
-                "user": {
-                    "name": "Tiago R. da costa"
-                },
-                "comentario": "Ótimo palpite sobre o jogo."
-            },
-            {
-                "user": {
-                    "name": "Tiago R. da costa"
-                },
-                "comentario": "Ótimo palpite sobre o jogo."
-            }
-        ];
+    router.get("/:id/comentarios", async (request, response) => {
+        const comentarios = await comentarioService.findAll();
         return response.json(comentarios);
     });
 
-    // router.post("/:id/comentarios", (request, response) => {
-    //
-    // });
+    router.post("/:id/comentarios", (request, response) => {
+    
+    });
 
     return router;
 };

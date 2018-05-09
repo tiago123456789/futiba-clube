@@ -43,6 +43,7 @@ class GroupFacade {
                     adivinhacao = adivinhacao[0] || {};
                     game.adivinhacao = {
                         score: adivinhacao.score,
+                        id_guessing: adivinhacao.id,
                         result_a: adivinhacao.result_a,
                         result_b: adivinhacao.result_b
                     };
