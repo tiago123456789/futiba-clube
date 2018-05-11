@@ -16,8 +16,17 @@ module.exports = (router) => {
         return response.json(comentarios);
     });
 
-    router.post("/:id/comentarios", (request, response) => {
-    
+    router.post("/:id/comentarios", async (request, response) => {
+        try {
+            const idGuessing = request.params.id;
+            const idUser = request.session.user.id;
+            const { name } = request.body;
+            const novoComentario = { comments: name, guessing_id: idGuessing, user_id: idUser };
+            await comentarioService.save(novoComentario);
+            response.sendStatus(201);
+        } catch(e) {
+            console.log(e);
+        }
     });
 
     return router;

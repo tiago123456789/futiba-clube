@@ -167,10 +167,10 @@
                 </div>
                 <div class="modal-body">
                     <div class="col-md-12">
-                        <form action="" method="post">
+                        <form action="" method="post" id="formulario-novo-comentario">
                             <div class="md-form">
                                 <i class="fa fa-comment prefix grey-text"></i>
-                                <input type="text" class="form-control" name="name">
+                                <input type="text" class="form-control" name="name" id="input-comentario">
                                 <label for="orangeForm-name">Comentário:</label>
                             </div>
                             <div class="md-form">
@@ -213,10 +213,10 @@
         const elementosHtmlDeComentarios = comentarios.map(item => {
             return `
                 <div class="col-md-12 border " style="padding: 5px; margin-bottom: 10px">
-                        <p class="text-justify">${item.comentario}</p>
+                        <p class="text-justify">${item.comments}</p>
                         <span class="font-bold">
                             <i class="fa fa-user-circle"></i>
-                               ${item.user.name}
+                               ${item.name}
                         </span>
                 </div>`
         }).join("");
@@ -231,25 +231,45 @@
             this._url = `http://localhost:3000/admin/adivinhacoes/${idGuessing}/comentarios`;
         }
 
-        getComentarios() {
+        getComentarios(callback) {
             $.ajax({ url: this._url, method: "GET", success: function(datas) {
-                    console.log(datas);
-                    montarListaComentarios(datas);
+                    callback(datas);
                 }
             })
         }
 
-        save(comentario) {
-
+        save(comentario, callback) {
+            $.post(this._url, comentario, function(data) {
+                callback();
+            });
         }
 
     }
 
-    const $btnModalComentarios = $(".btn_show_modal_comentarios");
 
-    $btnModalComentarios.click(function(event) {
-        const idGuessing = $(this).data("guessing");
-        new ComentarioService(idGuessing).getComentarios();
+    $(document).ready(function() {
+        const $btnModalComentarios = $(".btn_show_modal_comentarios");
+        const $formularioNovoComentario = $("#formulario-novo-comentario");
+
+        $btnModalComentarios.click(function(event) {
+            const idGuessing = getIdGuessings();
+            new ComentarioService(idGuessing).getComentarios(montarListaComentarios);
+        });
+
+        $formularioNovoComentario.submit(function(event) {
+            event.preventDefault();
+            const idGuessing = getIdGuessings();
+            const comentarioService = new ComentarioService(idGuessing);
+            comentarioService.save($(this).serialize(), () => {
+                $("#input-comentario").val("");
+                comentarioService.getComentarios(montarListaComentarios);
+            });
+        });
+
+
+        function getIdGuessings() {
+            return $btnModalComentarios.data("guessing");
+        }
     });
 
 
