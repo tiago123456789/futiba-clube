@@ -31,14 +31,9 @@
     <section class="content">
 
         <div class="container">
-            
-            <% if (message) { %>
-                <div class="alert alert-danger">
-                        <strong><%= message%> </strong>
-                </div>
-            <% } %>
-        
 
+            <% include ./partials/messageValidation.ejs %>
+            
             <div class="row">
 
                 <form class="col" method="post">

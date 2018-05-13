@@ -32,18 +32,14 @@
 
                     <form class="col" method="post" action="/users/login">
 
-                        <% if (error) { %>
-                            <div class="alert alert-danger">
-                                <strong><%= error %></strong>
-                            </div>
-                        <% } %>
-                        
+                        <% include ./partials/messageValidation.ejs %>
+
                         <div class="md-form">
 
                             <i class="fa fa-envelope prefix grey-text"></i>
 
                             <input type="text" id="orangeForm-email" 
-                            class="form-control" name="email">
+                            class="form-control" name="email" value="<%= email %>">
 
                             <label for="orangeForm-email">E-mail</label>
 
@@ -54,7 +50,7 @@
                             <i class="fa fa-lock prefix grey-text"></i>
 
                             <input type="password" id="orangeForm-pass"
-                             class="form-control" name="password">
+                             class="form-control" name="password" value="<%= password %>" >
 
                             <label for="orangeForm-pass">Senha</label>
 
