@@ -1,4 +1,5 @@
 const GroupFacade = require("./../facade/GroupFacade");
+const MESSAGES_APP = require("./../lib/MessagesApp");
 
 
 class GrupoController {
@@ -31,13 +32,14 @@ class GrupoController {
         const newGroup = request.body;
         const idUser = request.session.user.id;
         try {
+            this.validationForm(request, ["name"], (error, fieldsInformated) => {
+                response.render("groups", { error: error, ...fieldsInformated });
+            });
             const group = await this._grupoService.save(newGroup);
-            await this._grupoUserService.save(
-                { user_id: idUser, group_id: group[0].insertId, role: "OWNER"});
+            await this._grupoUserService.save({ user_id: idUser, group_id: group[0].insertId, role: "OWNER"});
             return response.redirect("/admin/grupos/");
         } catch (e) {
-            console.log(e);
-            response.render("groups", { ...newGroup, error: e.message, groups: []});
+            response.render("groups", { ...newGroup, error: [ { msg: e.message } ] , groups: []});
         }
     }
 
@@ -72,6 +74,18 @@ class GrupoController {
         const { id, idUser } = request.params;
         await this._grupoUserService.negarAcessoAoGrupoParaUsuarioEspecifico(id, idUser);
         response.redirect(`/admin/grupos/${id}`);
+    }
+
+    validationForm(request, fieldsValid, callbackFormInvalid) {
+        if (fieldsValid.includes("name")) {
+            request.checkBody("name", `Name ${MESSAGES_APP.CAMPO_OBRIGATORI}`).exists();
+        }
+
+        const errors = request.validationErrors();
+
+        if (errors) {
+            callbackFormInvalid(errors, request.body);
+        }
     }
 }
 
