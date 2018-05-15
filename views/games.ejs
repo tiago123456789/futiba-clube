@@ -38,14 +38,7 @@
             <h1 class="title">Nova Partida:</h1>
             <form class="col-md-12" method="post" action="/admin/games">
 
-                <% if (error) { %>
-                <div class="alert alert-danger">
-                    <strong>
-                        <%= error %>
-                    </strong>
-                </div>
-                <% } %>
-
+               <% include partials/messageValidation %>
                 <div class="md-form">
 
                     <i class="fa fa-envelope prefix grey-text"></i>

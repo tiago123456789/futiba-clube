@@ -78,7 +78,7 @@ class GrupoController {
 
     validationForm(request, fieldsValid, callbackFormInvalid) {
         if (fieldsValid.includes("name")) {
-            request.checkBody("name", `Name ${MESSAGES_APP.CAMPO_OBRIGATORI}`).exists();
+            request.checkBody("name", `Name ${MESSAGES_APP.CAMPO_OBRIGATORIO}`).isEmpty();
         }
 
         const errors = request.validationErrors();
