@@ -2,8 +2,10 @@ const express = require("express");
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const validator = require("express-validator");
+const morgan = require("morgan");
 
 const routesApp = require("./../routes/Index");
+const logger = require("./../config/Logger");
 const app = express();
 
 /**
@@ -24,6 +26,8 @@ app.set("view engine", "ejs");
  * @description Defined dir asserts application.
  */
 app.use(express.static("public"));
+
+app.use(morgan('combined', { stream: logger.stream }));
 
 /**
  * @description Middleware do parse data to json.
