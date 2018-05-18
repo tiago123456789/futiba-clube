@@ -1,0 +1,22 @@
+language: node_js
+
+# Define services.
+services:
+  - mysql
+
+# Define directories cached.
+cache:
+  directories:
+    - "node_modules"
+
+# Define notifications per email always than build success and failure.
+notifications:
+  emails:
+    - tiagorosadacost@gmail.com
+  on_success: always
+  on_failure: always 
+
+# Define branch running travis-ci.
+branchs:
+  only:
+    - master
