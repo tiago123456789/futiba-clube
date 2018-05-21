@@ -33,7 +33,7 @@ class GrupoController {
         const idUser = request.session.user.id;
         try {
             this.validationForm(request, ["name"], (error, fieldsInformated) => {
-                response.render("groups", { error: error, ...fieldsInformated });
+                return response.render("groups", { error: error, ...fieldsInformated, groups: [] });
             });
             const group = await this._grupoService.save(newGroup);
             await this._grupoUserService.save({ user_id: idUser, group_id: group[0].insertId, role: "OWNER"});
@@ -78,7 +78,8 @@ class GrupoController {
 
     validationForm(request, fieldsValid, callbackFormInvalid) {
         if (fieldsValid.includes("name")) {
-            request.checkBody("name", `Name ${MESSAGES_APP.CAMPO_OBRIGATORIO}`).isEmpty();
+            request.checkBody("name", `Name ${MESSAGES_APP.CAMPO_OBRIGATORIO}`)
+                .isLength({ min: 1});
         }
 
         const errors = request.validationErrors();

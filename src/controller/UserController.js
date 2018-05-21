@@ -23,12 +23,12 @@ class UserController {
         const newAccount = request.body;
         try {
             this.validationForm(request, ["name", "email", "password"], (errors, fieldsInformated) => {
-                response.render("new-account", { error: errors, ...fieldsInformated })
+                return response.render("new-account", { error: errors, ...fieldsInformated })
             });
             await this._userService.create(newAccount);
             response.redirect("/new-account");
         } catch (e) {
-            response.render("new-account", { message: e.message, ...newAccount });
+            response.render("new-account", { error: [ { msg: e.message } ], ...newAccount });
         }
     }
 
@@ -37,7 +37,7 @@ class UserController {
 
         try {
             this.validationForm(request, ["email", "password"], (errors, fieldsInformated) => {
-                response.render("login", { error: errors, ...fieldsInformated })
+                return response.render("login", { error: errors, ...fieldsInformated })
             });
             const userAuthenticated = await this._userService.authenticate(credenciais);
             request.session.user = userAuthenticated;
@@ -55,7 +55,7 @@ class UserController {
         if (fieldsValidated.includes("name")) {
             request
                 .checkBody("name", `Name ${MESSAGE_APP.CAMPO_OBRIGATORIO}`)
-                .isEmail();
+                .isLength({ min: 1 });
         }
 
         if (fieldsValidated.includes("email")) {
