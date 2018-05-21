@@ -17,7 +17,6 @@ class GameController {
 
     async save(request, response) {
         const newGame = request.body;
-        console.log(newGame);
         try {
             this.validationForm(request, ["team_a", "team_b"], (error, fieldInformated) => {
                 response.render("games", { error: error, ...fieldInformated, games: [ newGame ] });
@@ -48,15 +47,11 @@ class GameController {
     validationForm(request, fieldValidated, callbackInformationInvalid) {
         if (fieldValidated.includes("team_a")) {
             request
-                .checkBody("team_a", `Time A ${MESSAGES_APP.CAMPO_OBRIGATORIO}`)
-                .isEmpty();
-            request
                 .checkBody("team_a", `Time A ${MESSAGES_APP.MINIMO_3_CARACTERES}`)
                 .isLength({ min: 3 });            
         }
         
         if (fieldValidated.includes("team_b")) {
-            request.checkBody("team_b", `Time B ${MESSAGES_APP.CAMPO_OBRIGATORIO}`).isEmpty(); 
             request
                 .checkBody("team_b", `Time B ${MESSAGES_APP.MINIMO_3_CARACTERES}`)
                 .isLength({ min: 3 });             

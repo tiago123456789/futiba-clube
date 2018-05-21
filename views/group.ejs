@@ -1,6 +1,3 @@
-
-<!-- Inside of a group -->
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -143,8 +140,11 @@
                         </td>
                         <td>
                             <button class="btn btn-sm btn-primary">Dar palpite</button>
-                            <a href="#" class="btn btn-sm btn-default btn_show_modal_comentarios"
-                               data-toggle="modal" data-target="#modal_comentarios" data-guessing="<%= game.adivinhacao.id_guessing %>">Comentários</a>
+                            <% if (game.adivinhacao.length > 1) { %>
+                                <a href="#" class="btn btn-sm btn-default btn_show_modal_comentarios"
+                                   data-toggle="modal" data-target="#modal_comentarios"
+                                   data-guessing="<%= game.adivinhacao.id_guessing %>">Comentários</a>
+                            <% } %>
                         </td>
                     </form>
                 </tr>
@@ -191,8 +191,6 @@
 
 </section> <!-- Content -->
 
-<!-- JQuery -->
-
 <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
 
 <!-- Bootstrap Tool Tips -->
@@ -206,6 +204,7 @@
 <!-- Mdb Code Js -->
 
 <script type="text/javascript" src="/js/mdb.min.js"></script>
+
 
 <script type="text/javascript">
 
@@ -233,8 +232,8 @@
 
         getComentarios(callback) {
             $.ajax({ url: this._url, method: "GET", success: function(datas) {
-                    callback(datas);
-                }
+                callback(datas);
+            }
             })
         }
 
@@ -265,15 +264,10 @@
             });
         });
 
-
         function getIdGuessings() {
             return $btnModalComentarios.data("guessing");
         }
     });
-
-
-
 </script>
 </body>
-
 </html>
