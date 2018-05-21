@@ -23,3 +23,11 @@ notifications:
 branchs:
   only:
     - master
+
+# Define variables environment.
+env:
+  - PORT=3000
+  - HOST=localhost
+  - USER=root
+  - PASSWORD=root
+  - DATABASE=futiba_clube
